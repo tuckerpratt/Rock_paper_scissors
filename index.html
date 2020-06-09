@@ -1,48 +1,63 @@
 <!DOCTYPE html>
-
-<script>
-    //randomly selects an option for the computer to play
-    function computerPlay() {
-        const choices = ["rock", "paper", "scissors"];
-        return choices[Math.floor(Math.random() * choices.length)];
-    }
-
-    //will run the rps game
-    function playRound(playerSelection, computerSelection) {
-        let player = playerSelection.toLowerCase;
-        let computer = computerSelection;
-
-        switch(player, computer) {
-        case player === 'rock':
-            if (computer === 'scissors') {
-                return("You win, rock beats scissors!");
-            } else if (computer === 'paper') {
-                return("You lose, paper beats rock...");
-            }
-            break;
-
-            case player === 'scissors':
-                if (computer === 'paper') {
-                    return("You win, scissors beats paper!");
-                } else if (computer === 'rock') {
-                    return("You lose, rock beats scissors...");
-                }
-            break;
+<html>
+    <head>
+        <title>Page Title</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+    <script>
+        //randomly selects an option for the computer to play
+        function computerPlay() {
+            const choices = ["rock", "paper", "scissors"];
             
-            case player === 'paper':
-            if (computer === 'rock') {
-                return("You win, paper beats rock!");
-            } else if (computer === 'scissors') {
-                return("You lose, scissors beats paper...");
-            }
-            break;
-
-            case player === computer:
-                return("It's a tie!!");
-            break;
-            
-            return("Please enter a valid choice")
+            return choices[Math.floor(Math.random() * choices.length)];
         }
-    }
 
-</script>
+        //will run the rps game
+        function playRound(playerSelection, computerSelection) {
+            let player = playerSelection.toLowerCase();
+            let computer = computerSelection;
+            console.log(player);
+            console.log(computer);
+
+            switch(player) {
+            case 'rock':
+                if (computer === 'scissors') {
+                    return("You win, rock beats scissors!");
+                } else if (computer === 'paper') {
+                    return("You lose, paper beats rock...");
+                } else if (player === computer) {
+                    return("It's a tie!");
+                }
+                break;
+
+                case 'scissors':
+                    if (computer === 'paper') {
+                        return("You win, scissors beats paper!");
+                    } else if (computer === 'rock') {
+                        return("You lose, rock beats scissors...");
+                    } else if (player === computer) {
+                    return("It's a tie!");
+                }
+                break;
+                
+                case 'paper':
+                if (computer === 'rock') {
+                    return("You win, paper beats rock!");
+                } else if (computer === 'scissors') {
+                    return("You lose, scissors beats paper...");
+                } else if (player === computer) {
+                    return("It's a tie!");
+                }
+                break;
+
+                default:
+                    return("Please enter a valid choice.");
+            }
+        }
+
+    console.log(playRound('paper', computerPlay()));
+
+    </script>
+</body>
+</html>

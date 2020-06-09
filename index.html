@@ -6,6 +6,11 @@
     </head>
     <body>
     <script>
+        //Gets user input instead of having a default value
+        function userChoice() {
+            return(prompt("Please choose: rock, paper, or scissors", "rock"))
+        }
+
         //randomly selects an option for the computer to play
         function computerPlay() {
             const choices = ["rock", "paper", "scissors"];
@@ -68,7 +73,7 @@
         //runs the full game and declares a winner
         function game(rounds) {
             for (let i = 0; i < rounds; i++){
-                console.log(playRound('rock', computerPlay()));
+                console.log(playRound(userChoice(), computerPlay()));
         }
         if (playerWinCount > computerWinCount) {
                     console.log("You win! You're a champion!");

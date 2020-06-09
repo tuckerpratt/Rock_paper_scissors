@@ -12,6 +12,9 @@
             
             return choices[Math.floor(Math.random() * choices.length)];
         }
+        //counters to track number of rounds won
+        let playerWinCount = 0;
+        let computerWinCount = 0;
 
         //will run the rps game
         function playRound(playerSelection, computerSelection) {
@@ -23,8 +26,10 @@
             switch(player) {
             case 'rock':
                 if (computer === 'scissors') {
+                    playerWinCount++;
                     return("You win, rock beats scissors!");
                 } else if (computer === 'paper') {
+                    computerWinCount++;
                     return("You lose, paper beats rock...");
                 } else if (player === computer) {
                     return("It's a tie!");
@@ -33,8 +38,10 @@
 
                 case 'scissors':
                     if (computer === 'paper') {
+                        playerWinCount++;
                         return("You win, scissors beats paper!");
                     } else if (computer === 'rock') {
+                        computerWinCount++;
                         return("You lose, rock beats scissors...");
                     } else if (player === computer) {
                     return("It's a tie!");
@@ -43,8 +50,10 @@
                 
                 case 'paper':
                 if (computer === 'rock') {
+                    playerWinCount++;
                     return("You win, paper beats rock!");
                 } else if (computer === 'scissors') {
+                    computerWinCount++;
                     return("You lose, scissors beats paper...");
                 } else if (player === computer) {
                     return("It's a tie!");
@@ -56,7 +65,21 @@
             }
         }
 
-    console.log(playRound('paper', computerPlay()));
+        //runs the full game and declares a winner
+        function game(rounds) {
+            for (let i = 0; i < rounds; i++){
+                console.log(playRound('rock', computerPlay()));
+        }
+        if (playerWinCount > computerWinCount) {
+                    console.log("You win! You're a champion!");
+                } else if (playerWinCount < computerWinCount) {
+                    console.log("The computer wins! Better luck next time!")
+                } else {
+                    console.log("It's a grand tie! You are too evenly matched!!")
+                }
+            }
+
+    game(5);
 
     </script>
 </body>

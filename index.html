@@ -3,9 +3,107 @@
     <head>
         <title>Page Title</title>
         <meta charset="UTF-8"/>
+        <style>
+            button {
+                color: rgb(255, 0, 128);
+                display: flex;
+                
+            }
+
+            #window_div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 100vh;
+                min-width: 100vw;
+                background-color: rgb(187, 182, 212);
+            }
+
+            #button_div {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                flex: 1.5;
+                min-width: 100vw;
+            }
+
+            #result_div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                flex: 1.8;
+                min-width: 100vw;
+                font-size: 25px;
+            }
+
+            #scoreboard {
+                display: flex;
+                align-items: center;
+                flex: 3;
+                font-size: 150px;
+            }
+        </style>
     </head>
     <body>
     <script>
+        //counters to track number of rounds won
+        let playerWinCount = 0;
+        let computerWinCount = 0;
+
+
+        //creates div to hold divs
+        const window_div = document.createElement("div");
+        window_div.id = "window_div";
+        document.body.appendChild(window_div);
+
+        //creates div to hold the buttons
+        const button_div = document.createElement("div");
+        button_div.id = "button_div";
+        window_div.appendChild(button_div);
+
+        //creates div to display results
+        const result_div = document.createElement("div");
+        result_div.id="result_div";
+        result_div.innerText = "Can you defeat the mighty computer!?";
+        window_div.appendChild(result_div);
+
+        //div to keep running score
+        const scoreboard = document.createElement("div");
+        scoreboard.id = "scoreboard";
+        scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
+        window_div.appendChild(scoreboard);
+
+
+        //creates buttons for choices
+        const rock_button = document.createElement("button");
+        rock_button.innerText = 'ROCK';
+        rock_button.addEventListener("click", function(){
+            result_div.innerText = (playRound('rock', computerPlay()));
+            checkForWinner();
+        });
+        button_div.appendChild(rock_button);
+        
+
+        const paper_button = document.createElement("button");
+        paper_button.innerText = 'PAPER';
+        paper_button.addEventListener("click", function(){
+            result_div.innerText = (playRound('paper', computerPlay()));
+            checkForWinner();
+        });
+        button_div.appendChild(paper_button);
+
+        const scissors_button = document.createElement("button");
+        scissors_button.innerText = 'SCISSORS';
+        scissors_button.addEventListener("click", function(){
+            result_div.innerText = (playRound('scissors', computerPlay()));
+            checkForWinner();
+        });
+        button_div.appendChild(scissors_button);
+
+
+
+
         //Gets user input instead of having a default value
         function userChoice() {
             return(prompt("Please choose: rock, paper, or scissors", "rock"))
@@ -17,9 +115,7 @@
             
             return choices[Math.floor(Math.random() * choices.length)];
         }
-        //counters to track number of rounds won
-        let playerWinCount = 0;
-        let computerWinCount = 0;
+
 
         //will run the rps game
         function playRound(playerSelection, computerSelection) {
@@ -32,9 +128,11 @@
             case 'rock':
                 if (computer === 'scissors') {
                     playerWinCount++;
+                    scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
                     return("You win, rock beats scissors!");
                 } else if (computer === 'paper') {
                     computerWinCount++;
+                    scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
                     return("You lose, paper beats rock...");
                 } else if (player === computer) {
                     return("It's a tie!");
@@ -44,9 +142,11 @@
                 case 'scissors':
                     if (computer === 'paper') {
                         playerWinCount++;
+                        scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
                         return("You win, scissors beats paper!");
                     } else if (computer === 'rock') {
                         computerWinCount++;
+                        scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
                         return("You lose, rock beats scissors...");
                     } else if (player === computer) {
                     return("It's a tie!");
@@ -56,9 +156,11 @@
                 case 'paper':
                 if (computer === 'rock') {
                     playerWinCount++;
+                    scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
                     return("You win, paper beats rock!");
                 } else if (computer === 'scissors') {
                     computerWinCount++;
+                    scoreboard.innerText = `${playerWinCount} - ${computerWinCount}`;
                     return("You lose, scissors beats paper...");
                 } else if (player === computer) {
                     return("It's a tie!");
@@ -67,8 +169,17 @@
 
                 default:
                     return("Please enter a valid choice.");
-            }
+            };
         }
+
+        //checks to see if player or computer has won
+        function checkForWinner(){
+            if (playerWinCount === 5) {
+                result_div.innerText = "Game over! You win!";
+            } else if (computerWinCount === 5) {
+                result_div.innerText = "The computer wins! Better luck next time..."
+            }
+        };
 
         //runs the full game and declares a winner
         function game(rounds) {
@@ -84,7 +195,7 @@
                 }
             }
 
-    game(5);
+    //game(5);
 
     </script>
 </body>

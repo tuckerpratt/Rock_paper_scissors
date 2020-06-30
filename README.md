@@ -10,5 +10,5 @@ me a while to remember the proper way to write each case. Once
 I got that figured out though, it was not terribly difficult
 to finish the rest of the project.
 
-If/when I revisit this, I would like to try to add a UI using
-some CSS and html, to make it a more functional game.
+If/when I revisit this, I would like to clean up the UI and make 
+it look a lot more appealing.
